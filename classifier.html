@@ -209,7 +209,7 @@ the other is the label predicted by some models.</p>
 }
 </code></pre>
 
-<p>Loading data. 
+<p>Loading raw data. 
 We prepare 3 data: One is training dataset used for creating models.
 Next we set cross-validation dataset to estimate error rate 
 produced by our models.
@@ -233,9 +233,7 @@ cv       &lt;- raw_training[-inTrain, ]
 
 <p>Using the explanatory variables, we create models by random forest.</p>
 
-<pre><code class="r">input_vars &lt;- exp_input(input_vars_list)
-
-set.seed(1);
+<pre><code class="r">set.seed(1);
 
 model <- train( classe ~ new_window+num_window+roll_belt+pitch_belt+yaw_belt+total_accel_belt+roll_arm+pitch_arm+yaw_arm++total_accel_arm+roll_dumbbell+pitch_dumbbell
 +yaw_dumbbell+total_accel_dumbbell+roll_forearm+pitch_forearm+yaw_forearm+total_accel_forearm,data=training, method="rf")
@@ -266,7 +264,7 @@ checkClasification(cv$classe, predict(model, cv))
 The outputs are written in each files (total 20 files are created).</p>
 
 <pre><code class="r"># test sample
-answers &lt;- predict(model, testing)
+result &lt;- predict(model, testing)
 pml_write_files = function(x){
   n = length(x)
   for(i in 1:n){
@@ -274,7 +272,7 @@ pml_write_files = function(x){
     write.table(x[i],file=filename,quote=FALSE,row.names=FALSE,col.names=FALSE)
   }
 }
-pml_write_files(answers)
+pml_write_files(result)
 </code></pre>
 
 </body>
