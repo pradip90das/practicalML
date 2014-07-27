@@ -18,6 +18,7 @@ the other is the label predicted by some models.
 ```{r fig.width=7, fig.height=6}
 library(caret)
 
+
 checkClasification <- function(values, prediction){
   sum( prediction != values )/length(values)
 }
